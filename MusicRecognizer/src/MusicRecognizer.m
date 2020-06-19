@@ -54,7 +54,7 @@ for i=1:20
 end
 
 %%Load audio test to confront with the sogns in database
-test=Y11(96000*10:96000*15,1);
+test=Y1(96000*10:96000*11,1);
 
 %%Confront to with the stored songs with cross-correlation
 for i=1:20
@@ -68,6 +68,29 @@ for i=1:20
 end
 
 %%Calculate/Print percentage of equality
+for i=1:20
+    maxValues{i}=max(xc{i});
+end
 
+maxValuesMatrix=cell2mat(maxValues);
+
+
+%%Plot maximum values found
+figure; set(gcf,'name','Peaks values for each song','IntegerHandle','off');
+plot([1:20],maxValuesMatrix,'--o');
 
 %%Display the song that matches
+
+
+
+
+
+
+
+
+
+
+
+
+
+
