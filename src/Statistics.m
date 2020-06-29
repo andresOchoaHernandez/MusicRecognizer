@@ -1,9 +1,9 @@
 %%Una collezione di dati statistici sulle condizioni di acquisizione e di
 %%accuratezza dell'algoritmo
 
-%% Normal tests - recording from microphone,maximum volume from the smartphone,10 s of recording at 44100 Hz
+%% 1 Normal tests - recording from microphone,maximum volume from the smartphone,10 s of recording at 44100 Hz
 
-%test song diana : FAILURE
+%test song diana : FAILURE*
 %test song freebird : SUCCESS
 %test song freestyler : SUCCESS
 %test song funky : SUCCESS
@@ -14,14 +14,14 @@
 %test song internetFriends: SUCCESS
 %test song iWantToKnowWhatLoveIs: SUCCESS
 %test song lost: SUCCESS
-%test song moonRiver: FAILURE
+%test song moonRiver: FAILURE*
 %test song never: SUCCESS
 %test song rockTheCasbah: SUCCESS
-%test song somebodyToLove: FAILURE
+%test song somebodyToLove: FAILURE*
 %test song someWhereIBelong: SUCCESS
 %test song t69: SUCCESS
 %test song theRealSlimShady: SUCCESS
-%test song tinyDancer: FAILURE
+%test song tinyDancer: FAILURE*
 %test song wishYouWhereHere: FAILURE
 
 %SUCCESS RATE=15/20 -> 75% 
@@ -29,8 +29,16 @@
 % -essendo una registrazione effettuata col microfono di una cuffia il segnale non è mai pulito (quando si riproduce la registrazione è percepibile)
 % -è probabile che il microfono delle cuffie sia tarato per le frequenze tipiche della voce umana e dunque esegua in automatico delle operazioni sul
 %  segnale audio
-
-%% Normal test - Taking first 10 seconds of each song in the dataset
+% -*diana: come si vede dal workspace, diana è campionata a 32000 Hz e
+%  dunque non viene riconosciuta quando viene fatta una sua registrazione a
+%  44100 Hz perche si probabilmente si verifica dell'aliasing. Registrando
+%  10 secondi di canzone, campionando a 32000 Hz la canzone viene
+%  riconosciuta senza problemi.
+% -*moonRiver,someBodyToLove,tinyDancer: come si vede dal workspace, sono campionate a 48000 Hz
+%  e dunque campionando a 44100 Hz non vengono riconosciute. Effettuando 10
+%  secondi di registrazione a 48000 Hz le canzoni vengono riconosciute senza
+%  problemi.
+%% 2 Normal test - Taking first 10 seconds of each song in the dataset
 
 %test song diana : SUCCESS
 %test song freebird : SUCCESS
@@ -61,7 +69,7 @@
 %  test=dataset{20}(32000 * 110 : 32000* 120) la canzone viene riconosciuta
 %  senza problemi
 
-%% Normal test - Taking middle 2 seconds of each song in the dataset
+%% 3 Normal test - Taking middle 2 seconds of each song in the dataset
 
 %test song diana : SUCCESS
 %test song freebird : SUCCESS
@@ -95,7 +103,7 @@
 %  Nel grafico dei picchi si può comunque notare che il secondo picco piu 
 %  alto era quello in corrsipondenza della canzone giusta.
 
-%% Normal test - Taking initial 2 seconds of each song in the dataset
+%% 4 Normal test - Taking initial 2 seconds of each song in the dataset
 
 %test song diana : SUCCESS
 %test song freebird : FAILURE
@@ -122,6 +130,14 @@
 %NOTES:
 % -test=dataset{song#}(32000 * 1 : 32000* 3)
 %% CONCLUSIONS
-% -acquisire la registrazione da più probabilità di avere risultati sbagliati a causa delle problematiche legate alla registrazione
-% -prendere la parte iniziale di una canzone per riconoscerla puo portare a risultati sbagliati
-% -è meglio prendere da 2 a 10 secondi di una canzone in una parte 'mediana' per aumentare le chance di match 
+% -In esperimenti ulteriori ho provato a registrare 10 secondi di freeBird
+%  campionando a [44100 +- 10] Hz ottenendo risultati sbagliati. Ho
+%  osservato però che campionando a [44100 +- 5] Hz ottenevo un match.
+%  Questa osservazione ed il tes #1 mi portano a concludere che sarebbe ideale avere un dataset con
+%  file mp3 alla stessa frequenza in modo da aumentare le probabilità di
+%  match.
+%
+% -I test #2,#3,#4 mi portano a concludere che una registrazione mediamente
+%  lunga (dai 2 ai 10 secondi) che contenga una parte non inziale di una
+%  canzone sono le modalità migliori di acquisizione di una registrazione per
+%  il riconoscimento di una canzone.
