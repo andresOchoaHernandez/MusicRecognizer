@@ -2,7 +2,7 @@ clear;
 clc;
 sep='=====================================================================';
 
-%ALREADY DONE:loadDataset();
+loadDataset();
 
 disp('Loading dataset...');
 tic
