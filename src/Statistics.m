@@ -38,8 +38,9 @@
 %  e dunque campionando a 44100 Hz non vengono riconosciute. Effettuando 10
 %  secondi di registrazione a 48000 Hz le canzoni vengono riconosciute senza
 %  problemi.
-%% 1.2 Normal tests - recording from microphone,medium volume from the smartphone at 0.6 m from
-%%the microphone,10 s of recording at varying frequency (based on the mp3 freq)
+
+
+%% 1.2 Normal tests - recording from microphone,medium volume from the smartphone at 0.6 m from the microphone,10 s of recording at varying frequency (based on the mp3 freq)
 
 %test song diana : 32k Hz -> SUCCESS
 %test song freebird : 44.1 k Hz -> FAILURE
